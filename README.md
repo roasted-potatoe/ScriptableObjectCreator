@@ -1,6 +1,8 @@
 # ScriptableObjectCreator
 Create a ScriptableObject in Unity as easily as using "Add Component".
 
+To use, copy the contents of the repository into your own project, feel free to remove the "Examples" and ".readme" folders.
+
 Start by creating a new blank ScriptableObject
 
 ![Create Scriptable Object](.readme/create_so.png)
