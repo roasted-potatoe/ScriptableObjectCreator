@@ -236,7 +236,15 @@ namespace ScriptableObjectCreator.Editor
 				}
 			};
 
-			m_CurrentItem = m_RootItem;
+			if (string.IsNullOrEmpty(m_SearchText))
+			{
+				m_CurrentItem = m_RootItem;
+			}
+			else
+			{
+				m_CurrentItem = m_SearchItem;
+				m_CurrentSelected = 0;
+			}
 		}
 
 		private string[] GetFolderHierarchy(Type type)
