@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace ScriptableObjectCreator.Editor
+namespace Tools.ScriptableObjectCreator.Editor
 {
 	[CustomEditor(typeof(ScriptableObjectCreator))]
 	public class ScriptableObjectCreatorEditor : UnityEditor.Editor
@@ -19,6 +19,7 @@ namespace ScriptableObjectCreator.Editor
 		private int m_CurrentSelected = -1;
 		private string m_SearchText;
 		private string m_CreateText;
+		private string m_AssetPath;
 		private Vector3 m_Scroll;
 
 		private ScriptableObjectCreatorItem m_RootItem;
@@ -29,6 +30,8 @@ namespace ScriptableObjectCreator.Editor
 
 		private void OnEnable()
 		{
+			m_AssetPath = AssetDatabase.GetAssetPath(serializedObject.targetObject);
+
 			m_SearchText = EditorPrefs.GetString(target.GetType().ToString() + CONTROL_NAME_SEARCH, string.Empty);
 			CreateAllItems();
 		}
@@ -277,6 +280,8 @@ namespace ScriptableObjectCreator.Editor
 			serializedObject.Update();
 			serializedObject.FindProperty("m_Script").objectReferenceValue = script;
 			serializedObject.ApplyModifiedProperties();
+
+			AssetDatabase.ImportAsset(m_AssetPath);
 		}
 
 		private void DrawSearch()
